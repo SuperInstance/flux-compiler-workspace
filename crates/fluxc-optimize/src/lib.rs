@@ -21,7 +21,9 @@ pub fn optimize(module: &mut IrModule) -> Result<(), OptError> {
 /// Remove unreachable / no-op instructions.
 pub fn dead_code_elimination(module: &mut IrModule) -> Result<(), OptError> {
     for block in &mut module.blocks {
-        block.instructions.retain(|inst| !matches!(inst, FluxIR::Nop));
+        block
+            .instructions
+            .retain(|inst| !matches!(inst, FluxIR::Nop));
     }
     Ok(())
 }
@@ -41,14 +43,16 @@ pub fn strength_reduction(_module: &mut IrModule) -> Result<(), OptError> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use fluxc_ir::{FluxIR, BasicBlock};
+    use fluxc_ir::{BasicBlock, FluxIR};
 
     #[test]
     fn dead_code_removes_nop() {
         let mut module = IrModule::new("test");
         let mut block = BasicBlock::new("entry");
         block.instructions.push(FluxIR::Nop);
-        block.instructions.push(FluxIR::CheckExact { slot: 0, value: 1 });
+        block
+            .instructions
+            .push(FluxIR::CheckExact { slot: 0, value: 1 });
         module.blocks.push(block);
 
         dead_code_elimination(&mut module).unwrap();

@@ -55,9 +55,9 @@ enum Token {
     And,
     Or,
     Not,
-    RangeOp,   // ..
-    DomainOp,  // @
-    EqOp,      // =
+    RangeOp,  // ..
+    DomainOp, // @
+    EqOp,     // =
 }
 
 fn tokenize(input: &str) -> Result<Vec<Token>, ParseError> {

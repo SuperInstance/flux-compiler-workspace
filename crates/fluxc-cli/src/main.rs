@@ -67,8 +67,15 @@ fn main() {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Compile { input, target, output } => {
-            println!("Compiling {:?} for target '{}' -> {:?}", input, target, output);
+        Commands::Compile {
+            input,
+            target,
+            output,
+        } => {
+            println!(
+                "Compiling {:?} for target '{}' -> {:?}",
+                input, target, output
+            );
         }
         Commands::Bench { input, iterations } => {
             println!("Benchmarking {:?} ({} iterations)", input, iterations);
